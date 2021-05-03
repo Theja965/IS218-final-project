@@ -24,6 +24,8 @@ isdone SMALLINT(2) NOT NULL,
 duedate DATETIME NOT NULL
 )";
 
+    // FOR isdone: 2 is COMPLETE, anything else (including 1) is INCOMPLETE
+
     // use exec() because no results are returned
     $dsn->exec($sql);
     echo "Table Tables created successfully";
