@@ -35,7 +35,7 @@ function showName()
 
 //2.2
 
-function listUrgentTasks($user)
+function listTasks($user)
 {
     $host2 = 'sql1.njit.edu';
     $username2 = 'nak29';
