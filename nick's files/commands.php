@@ -97,7 +97,7 @@ function addTask($title, $description, $urgency, $duedate)
 }
 
 
-//2.4
+//2.4 + 2.7
 function editTask($id, $title, $description, $urgency, $duedate)
 {
     $host2 = 'sql1.njit.edu';
@@ -188,6 +188,8 @@ function finishTask($id)
 
 }
 
+
+//2.7 (CHECK 2.4)
 
 //2.8
 function deleteCompletedTask($id)
@@ -310,6 +312,37 @@ function countCurrentTasks($user)
     }
 
 }
+
+//2.11
+function timeOfTask($id)
+{
+    $host2 = 'sql1.njit.edu';
+    $username2 = 'nak29';
+    $password2 = 'Password2021!';
+    $dbname2 = 'nak29';
+
+    try {
+        $dsn = new PDO("mysql:host=$host2;dbname=$dbname2", $username2, $password2);
+        // set the PDO error mode to exception
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $sql = "SELECT duedate From Tables where id=?";
+        $stmt= $dsn->prepare($sql);
+        $stmt->execute($id);
+
+        return True;
+        // use exec() because no results are returned
+        //$dsn->exec($sql);
+    }
+
+    catch(PDOException $e)
+    {
+        return "something went big messy" . "<br>" . $e->getMessage();
+    }
+
+}
+
 
 //2.12
 
