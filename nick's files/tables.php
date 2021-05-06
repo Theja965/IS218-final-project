@@ -20,7 +20,7 @@ user VARCHAR(60) NOT NULL,
 title VARCHAR(60) NOT NULL,
 description VARCHAR(120) NOT NULL,
 urgency SMALLINT(2) NOT NULL,
-isdone SMALLINT(2) NOT NULL,
+isdone SMALLINT(2),
 duedate DATETIME NOT NULL
 )";
 
