@@ -64,6 +64,37 @@ function listTasks($user)
 
 }
 
+function listCompletedTasks($user)
+{
+    $host2 = 'sql1.njit.edu';
+    $username2 = 'nak29';
+    $password2 = 'Password2021!';
+    $dbname2 = 'nak29';
+
+    try {
+        $dsn = new PDO("mysql:host=$host2;dbname=$dbname2", $username2, $password2);
+        // set the PDO error mode to exception
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $sql = "SELECT * FROM Tables WHERE user=? AND isdone=2;";
+        $stmt= $dsn->prepare($sql);
+        $stmt->execute([$user]);
+
+        return True;
+        // use exec() because no results are returned
+        //$dsn->exec($sql);
+    }
+
+    catch(PDOException $e)
+    {
+        return "something went big messy" . "<br>" . $e->getMessage();
+    }
+
+}
+
+
+
 
 //2.3
 function addTask($title, $description, $urgency, $duedate)
