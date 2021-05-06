@@ -1,42 +1,4 @@
-<?php
-require('TODO-Functions.php');
-require_once('TODO-Connection.php');
-require("commands.php");
 
-
-//$result = DisplayData($_SESSION["Username"]);
-$result = DisplayData('SunRav01');
-
-if(!$result){
-    echo "No Tasks found for the user";
-}  else{
-        // print_r($result);
-    print("<table style='align-content: center;' border=\"1\">");
-    foreach ($result as $line_num =>$line){
-        if($line_num == 0){
-            print("<tr>");
-            $count_col = 0;
-            foreach($line as $col_name => $columns){
-                if ($count_col%2 == 0){
-                    print("<th>$col_name</th>");
-                }
-                $count_col++;
-            }
-            print("<tr>");
-        }
-        print("<tr>");
-        $count_col = 0;
-        foreach ($line as $col_name => $columns){
-            if($count_col%2 == 0){
-                print("<td> $columns</td>");
-            }
-            $count_col++;
-        }
-        print("<tr>");
-    }
-    print("<tr>");
-}
-?>
 <html>
 <link href="style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -52,18 +14,18 @@ if(!$result){
                 <a class="nav-link" href="index.html" style="color: whitesmoke">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Completed.html"style="color: whitesmoke">Completed Tasks</a>
+                <a class="nav-link" href="Completed.html" style="color: whitesmoke">Completed Tasks</a>
             </li>
         </ul>
     </div>
 </nav>
 <button class="open-button" style="background-image: linear-gradient(to right, #0C96E4 0%, #0ccce4 100%)" onclick="openForm()">Add A Task</button>
-    <button class="open-button1" style="background-image: linear-gradient(to right, #0C96E4 0%, #0ccce4 100%)"onclick="openForm()">Delete A Task</button>
-    <button class="open-button2" style="background-image: linear-gradient(to right, #0C96E4 0%, #0ccce4 100%)"onclick="openForm()">Edit A Task</button>
+<button class="open-button1" style="background-image: linear-gradient(to right, #0C96E4 0%, #0ccce4 100%)"onclick="openForm()">Delete A Task</button>
+<button class="open-button2" style="background-image: linear-gradient(to right, #0C96E4 0%, #0ccce4 100%)"onclick="openForm()">Edit A Task</button>
 
 
-<form class="form-popup" id="myForm">
-    <form action="commands.php"
+<div class="form-popup" id="myForm">
+
     <label for="task"><b>Task</b></label>
     <input type="text" placeholder="Enter Your Task" name="Task" required>
 
@@ -81,11 +43,7 @@ if(!$result){
 
     <button type="submit" class="btn">Submit</button>
     <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
-</form>
-<div class="form-popup" id="DelForm">
-    <label for="delTask"><b>ID Number</b></label>
-    <input type="number" placeholder="Enter the ID number" name="Delete Task" required>
-
+    </form>
 </div>
 <script>
     function openForm() {
