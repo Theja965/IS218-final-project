@@ -1,3 +1,40 @@
+<?php
+require('TODO-Functions.php');
+require_once('TODO-Connection.php');
+
+
+$result = DisplayData("SunRav01");
+
+if(!$result){
+    echo "No Tasks found for the user";
+}  else{
+    // print_r($result);
+    print("<table style='margin: auto; margin-top: 50px;' border=\"1\">");
+    foreach ($result as $line_num =>$line){
+        if($line_num == 0){
+            print("<tr>");
+            $count_col = 0;
+            foreach($line as $col_name => $columns){
+                if ($count_col%2 == 0){
+                    print("<th>$col_name</th>");
+                }
+                $count_col++;
+            }
+            print("<tr>");
+        }
+        print("<tr>");
+        $count_col = 0;
+        foreach ($line as $col_name => $columns){
+            if($count_col%2 == 0){
+                print("<td> $columns</td>");
+            }
+            $count_col++;
+        }
+        print("<tr>");
+    }
+    print("<tr>");
+}
+?>
 
 <html>
 <link href="style.css" rel="stylesheet">
