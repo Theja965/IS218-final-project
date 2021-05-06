@@ -159,7 +159,7 @@ function editTask($id, $title, $description, $urgency, $duedate)
 }
 
 
-//2.5
+//2.5 AND 2.8
 function deleteTask($id)
 {
     $host2 = 'sql1.njit.edu';
@@ -173,7 +173,7 @@ function deleteTask($id)
         $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-        $sql = "DELETE FROM Tables where id=? AND isdone!=2";
+        $sql = "DELETE FROM Tables where id=?";
         $stmt= $dsn->prepare($sql);
         $stmt->execute([$id]);
 
@@ -222,35 +222,7 @@ function finishTask($id)
 
 //2.7 (CHECK 2.4)
 
-//2.8
-function deleteCompletedTask($id)
-{
-    $host2 = 'sql1.njit.edu';
-    $username2 = 'nak29';
-    $password2 = 'Password2021!';
-    $dbname2 = 'nak29';
-
-    try {
-        $dsn = new PDO("mysql:host=$host2;dbname=$dbname2", $username2, $password2);
-        // set the PDO error mode to exception
-        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-        $sql = "DELETE From Tables where id=? AND isdone=2";
-        $stmt= $dsn->prepare($sql);
-        $stmt->execute($id);
-
-        return True;
-        // use exec() because no results are returned
-        //$dsn->exec($sql);
-    }
-
-    catch(PDOException $e)
-    {
-        return "something went big messy" . "<br>" . $e->getMessage();
-    }
-
-}
+//2.8 (CHECK 2.5)
 
 //2.9
 function uncompleteTask($id)
@@ -267,6 +239,35 @@ function uncompleteTask($id)
 
 
         $sql = "UPDATE Tables where id=? AND isdone=2 SET isdone=1";
+        $stmt= $dsn->prepare($sql);
+        $stmt->execute($id);
+
+        return True;
+        // use exec() because no results are returned
+        //$dsn->exec($sql);
+    }
+
+    catch(PDOException $e)
+    {
+        return "something went big messy" . "<br>" . $e->getMessage();
+    }
+
+}
+
+function completeTask($id)
+{
+    $host2 = 'sql1.njit.edu';
+    $username2 = 'nak29';
+    $password2 = 'Password2021!';
+    $dbname2 = 'nak29';
+
+    try {
+        $dsn = new PDO("mysql:host=$host2;dbname=$dbname2", $username2, $password2);
+        // set the PDO error mode to exception
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $sql = "UPDATE Tables where id=? AND isdone!=2 SET isdone=2";
         $stmt= $dsn->prepare($sql);
         $stmt->execute($id);
 
