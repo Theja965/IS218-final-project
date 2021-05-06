@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once('TODO-Connection.php');
+$result = DisplayData($_SESSION["Username"]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
